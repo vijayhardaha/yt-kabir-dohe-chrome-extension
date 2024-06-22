@@ -3,34 +3,45 @@ name: Release Chrome Extension
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*'  # Trigger on tag push that starts with 'v'
 
 jobs:
   build:
+    name: Create Release
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: npm install
+      - name: Get Tag
+        id: tag
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+        # Extract and store the tag from the GITHUB_REF environment variable.
+        # This stores the tag value in the $tag environment variable.
 
       - name: Create ZIP file
-        run: zip -r youtube-auto-commenter-extension-kabir-ke-dohe.zip * -x "*.git*" "node_modules/*" ".github/*" "lib" ".*" "eslint.*"
+        run: zip -r youtube-auto-commenter-extension.zip * -x "*.git*" "node_modules/*" ".github/*" "lib/*" ".*" "eslint.*"
+        # Create a ZIP archive excluding unnecessary files and folders.
 
       - name: Create GitHub Release
         id: create_release
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: youtube-auto-commenter-extension-kabir-ke-dohe.zip
+          artifacts: youtube-auto-commenter-extension.zip
           tag: ${{ github.ref }}
-          name: Release ${{ github.ref }}
+          name: Release ${{ steps.tag.outputs.tag }}
           draft: false
           prerelease: false
+        # Use the ncipollo/release-action to create a GitHub release
+        # using the generated ZIP file and the tag.
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v2
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./youtube-auto-commenter-extension.zip
+          asset_name: youtube-auto-commenter-extension.zip
+          asset_content_type: application/zip
+        # Upload the created ZIP file as a release asset.
