@@ -36,12 +36,3 @@ jobs:
           prerelease: false
         # Use the ncipollo/release-action to create a GitHub release
         # using the generated ZIP file and the tag.
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v2
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./youtube-auto-commenter-extension.zip
-          asset_name: youtube-auto-commenter-extension.zip
-          asset_content_type: application/zip
-        # Upload the created ZIP file as a release asset.
