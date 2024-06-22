@@ -53,11 +53,13 @@ youtube-auto-commenter-kabir-ke-dohe/
 │   ├── icon32.png
 │   ├── icon48.png
 │   ├── icon128.png
-├── content.js
-├── background.js
-├── comments.json
+├── lib/
+│   ├── build-json.js
+├── src/
+│   ├── content.js
+│   ├── background.js
+│   ├── comments.json
 ├── manifest.json
-├── popup.html
 ├── README.md
 ```
 
@@ -67,7 +69,6 @@ youtube-auto-commenter-kabir-ke-dohe/
 - `content.js`: Interacts with the YouTube page to post a comment and like the video.
 - `comments.json`: Stores the list of "Kabir Ke Dohe".
 - `manifest.json`: Defines the extension and its permissions.
-- `popup.html`: Simple HTML file for the extension's popup (optional).
 
 ### GitHub Actions
 
