@@ -9,7 +9,7 @@
 
     // Pick a random comment from the comments array
     const randomComment =
-      comments[Math.floor(Math.random() * comments.length)].text;
+      comments[Math.floor(Math.random() * comments.length)].doha;
 
     // Function to post a comment
     const postComment = async (comment) => {
@@ -18,11 +18,16 @@
         const placeholderBox = document.querySelector(
           "#simple-box #placeholder-area"
         );
-        placeholderBox.click();
 
-        // Find the comment box and set its text to the chosen random comment
-        const commentBox = document.querySelector("#contenteditable-root");
-        commentBox.innerText = comment;
+        if (placeholderBox !== null) {
+          placeholderBox.click();
+
+          // Find the comment box and set its text to the chosen random comment
+          const commentBox = document.querySelector("#contenteditable-root");
+          if (commentBox !== null){
+            commentBox.innerText = comment;
+          }
+        }
       } catch (error) {
         console.error("Failed to post the comment:", error);
       }
@@ -35,9 +40,7 @@
         const likeButton = document.querySelector(
           'like-button-view-model button[title="I like this"]'
         );
-        if (likeButton !== null) {
-          likeButton.click();
-        }
+        if (likeButton !== null) likeButton.click();
       } catch (error) {
         console.error("Failed to like the video:", error);
       }
