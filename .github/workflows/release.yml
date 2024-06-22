@@ -16,31 +16,21 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
 
       - name: Create ZIP file
-        run: zip -r chrome-extension.zip * -x "*.git*" "node_modules/*" ".github/*" "lib" ".*" "eslint.*"
+        run: zip -r youtube-auto-commenter-extension-kabir-ke-dohe.zip * -x "*.git*" "node_modules/*" ".github/*" "lib" ".*" "eslint.*"
 
-      - name: Create GitHub release
+      - name: Create GitHub Release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: youtube-auto-commenter-extension-kabir-ke-dohe.zip
+          tag: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-
-      - name: Upload ZIP to release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./chrome-extension.zip
-          asset_name: chrome-extension.zip
-          asset_content_type: application/zip
