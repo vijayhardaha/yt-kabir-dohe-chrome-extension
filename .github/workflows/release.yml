@@ -24,7 +24,7 @@ jobs:
         # This stores the tag value in the $tag environment variable.
 
       - name: Create ZIP file
-        run: zip -r youtube-auto-commenter-extension.zip * -x "*.git*" "node_modules/*" ".github/*" "lib/*" ".*" "eslint.*"
+        run: zip -r yt-kabir-dohe-chrome-extension.zip * -x "*.git*" "node_modules/*" ".github/*" "lib/*" ".*" "eslint.*"
         # Create a ZIP archive excluding unnecessary files and folders.
 
       - name: Create GitHub Release
@@ -32,9 +32,9 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           token: ${{ env.GITHUB_TOKEN }}
-          artifacts: youtube-auto-commenter-extension.zip
+          artifacts: yt-kabir-dohe-chrome-extension.zip
           tag: ${{ github.ref }}
-          name: Release ${{ steps.tag.outputs.tag }}
+          name: ${{ steps.tag.outputs.tag }}
           draft: false
           prerelease: false
         # Use the ncipollo/release-action to create a GitHub release
