@@ -1,8 +1,8 @@
-# YouTube Auto Commenter Extension - Kabir Ke Dohe
+# YouTube Kabir Ke Dohe - Chrome Extension
 
-## Overview
+YouTube Kabir Ke Dohe - Chrome Extension is a Chrome extension that automates the process of posting a comment and liking YouTube videos. When you click on the extension icon while on a YouTube video page, it randomly picks a "Kabir's doha" from a predefined list and posts it, and likes the video.
 
-The YouTube Auto Commenter Extension is a Chrome extension that automates the process of posting a comment and liking YouTube videos. When you click on the extension icon while on a YouTube video page, it randomly picks a "Kabir Ke Dohe" (couplets by Kabir) from a predefined list and posts it, and likes the video.
+> Note: You'll have to press comment button on your own, this extension will only write the doha in your Youtube's video comment box.
 
 ## Features
 
@@ -18,13 +18,13 @@ To install the extension locally:
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/yourusername/youtube-auto-commenter-kabir-ke-dohe.git
+   git clone https://github.com/vijayhardaha/yt-kabir-dohe-chrome-extension.git
    ```
 
 2. Navigate to the cloned directory:
 
    ```sh
-   cd youtube-auto-commenter-kabir-ke-dohe
+   cd yt-kabir-dohe-chrome-extension
    ```
 
 3. Open the Chrome browser and go to `chrome://extensions/`.
@@ -44,7 +44,7 @@ To install the extension locally:
 ### Directory Structure
 
 ```
-youtube-auto-commenter-kabir-ke-dohe/
+yt-kabir-dohe-chrome-extension/
 ├── .github/
 │   └── workflows/
 │       └── release.yml
@@ -54,7 +54,7 @@ youtube-auto-commenter-kabir-ke-dohe/
 │   ├── icon48.png
 │   ├── icon128.png
 ├── lib/
-│   ├── build-json.js
+│   ├── build.js
 ├── src/
 │   ├── content.js
 │   ├── background.js

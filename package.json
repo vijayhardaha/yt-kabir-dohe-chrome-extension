@@ -1,20 +1,11 @@
 {
-  "name": "youtube-auto-commenter-extension-kabir-ke-dohe",
+  "name": "yt-kabir-dohe-chrome-extension",
   "version": "1.0.0",
-  "description": "A Chrome extension that automatically posts \"Kabir Ke Dohe\" comments and likes YouTube videos. Click the extension icon while on a YouTube video page to use.",
-  "main": "background.js",
+  "description": "A Chrome extension that automatically posts a random Kabir doha in the YouTube video comment box and likes the video. Simply click the extension icon while watching a YouTube video to activate.",
   "scripts": {
-    "build": "node lib/build-json.js",
+    "build": "node lib/build.js",
     "lint": "eslint src/**/*.js"
   },
-  "keywords": [
-    "chrome-extension",
-    "youtube",
-    "automation",
-    "auto-comment",
-    "like-videos",
-    "kabir-ke-dohe"
-  ],
   "author": "Vijay Hardaha",
   "license": "MIT",
   "devDependencies": {
