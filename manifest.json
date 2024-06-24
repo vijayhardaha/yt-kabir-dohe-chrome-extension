@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "YT Kabir Ke Dohe",
   "description": "A Chrome extension that automatically posts a random Kabir doha in the YouTube video comment box and likes the video. Simply click the extension icon while watching a YouTube video to activate.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "permissions": ["activeTab", "scripting"],
   "background": {
     "service_worker": "src/background.js"
