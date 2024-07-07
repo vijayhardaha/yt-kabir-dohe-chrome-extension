@@ -9,11 +9,10 @@
   "author": "Vijay Hardaha",
   "license": "MIT",
   "devDependencies": {
-    "@eslint/js": "^9.5.0",
+    "@eslint/js": "^9.6.0",
     "axios": "^1.7.2",
     "csvtojson": "^2.0.10",
-    "eslint": "^9.5.0",
-    "globals": "^15.6.0"
-  },
-  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
+    "eslint": "^9.6.0",
+    "globals": "^15.8.0"
+  }
 }
