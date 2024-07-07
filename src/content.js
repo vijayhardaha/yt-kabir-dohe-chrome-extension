@@ -23,8 +23,9 @@
       // Combine the comment and the footer into a single array and join with newline characters
       return [...comment, ...commentFooter]
         .join("\n") // Join array elements into a single string with newline characters
+        .replace("  ", " ") // Correct double spacing"
         .replace(" ।", "।") // Correct spacing around punctuation "।"
-        .replace(" ॥", "॥"); // Correct spacing around punctuation "॥"
+        .replace(" ।।", "।।"); // Correct spacing around punctuation "।।"
     };
 
     /**
