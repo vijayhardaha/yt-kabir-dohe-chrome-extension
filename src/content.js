@@ -1,7 +1,7 @@
-/* global chrome */
+/* global chrome, document */
 
 // Immediately Invoked Function Expression (IIFE) to encapsulate the code
-(async function () {
+(async function() {
   try {
     // Fetch comments from the JSON file using Chrome extension API
     const response = await fetch(chrome.runtime.getURL("src/comments.json"));
@@ -22,10 +22,10 @@
 
       // Combine the comment and the footer into a single array and join with newline characters
       return [...comment, ...commentFooter]
-        .join("\n") // Join array elements into a single string with newline characters
-        .replace("  ", " ") // Correct double spacing"
-        .replace(" ।", "।") // Correct spacing around punctuation "।"
-        .replace(" ।।", "।।"); // Correct spacing around punctuation "।।"
+          .join("\n") // Join array elements into a single string with newline characters
+          .replace("  ", " ") // Correct double spacing"
+          .replace(" ।", "।") // Correct spacing around punctuation "।"
+          .replace(" ।।", "।।"); // Correct spacing around punctuation "।।"
     };
 
     /**
@@ -44,8 +44,8 @@
       } catch (error) {
         // Log an error if the selection process fails
         console.error(
-          `Failed to select element with selector "${selector}":`,
-          error
+            `Failed to select element with selector "${selector}":`,
+            error,
         );
         return null;
       }
@@ -84,7 +84,7 @@
       try {
         // Find the like button using a CSS selector
         const likeButton = qs(
-          'like-button-view-model button[title="I like this"]'
+            "like-button-view-model button[title=\"I like this\"]",
         );
         // If the like button exists, click it to like the video
         if (likeButton !== null) likeButton.click();

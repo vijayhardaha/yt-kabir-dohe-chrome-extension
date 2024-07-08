@@ -6,7 +6,7 @@ chrome.action.onClicked.addListener((tab) => {
   if (tab.url.includes("youtube.com/watch")) {
     // Execute a content script in the tab
     chrome.scripting.executeScript({
-      target: { tabId: tab.id }, // Specify the tab to execute the script in
+      target: {tabId: tab.id}, // Specify the tab to execute the script in
       files: ["src/content.js"], // Specify the content script file to execute
     });
   } else {
