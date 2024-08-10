@@ -5,57 +5,65 @@ import { prepareComment, qs, fetchRandomComment } from "./utils.js";
  */
 ( async function() {
 	try {
-		// Fetch a random comment from the comments JSON file
+		// Fetch a random comment
 		const randomComment = await fetchRandomComment();
 
 		/**
 		 * Posts a comment to the YouTube comment box.
 		 * @param {string} comment - The comment text to be posted.
-		 * @return {void}
+		 * @return {boolean} - Returns false if the comment button or other elements are not found.
 		 */
 		const postComment = async ( comment ) => {
 			try {
-				// Find the placeholder box where the comment input area is activated
-				const placeholderBox = qs( "#simple-box #placeholder-area" );
-				if ( placeholderBox !== null ) {
-					placeholderBox.click(); // Click the placeholder box to activate the comment input area
-
-					// Find the editable comment box and set its text to the prepared comment
-					const commentBox = qs( "#contenteditable-root" );
-					if ( commentBox !== null ) {
-						commentBox.innerText = prepareComment( comment ); // Set the comment text
-					}
+				// Find the comment button and click it
+				const commentButton = qs( "#comments-button .yt-spec-button-shape-with-label > button" );
+				if ( ! commentButton ) {
+					return false; // Exit if comment button is not found
 				}
+				commentButton.click();
+
+				// Wait for the comment box to be available
+				setTimeout( () => {
+					// Find and click the placeholder box
+					const placeholderBox = qs( "#placeholder-area #simplebox-placeholder" );
+					if ( ! placeholderBox ) {
+						return false; // Exit if placeholder box is not found
+					}
+					placeholderBox.click();
+
+					// Find the comment box and post the comment
+					const commentBox = qs( ".ytd-comment-simplebox-renderer #contenteditable-root" );
+					if ( ! commentBox ) {
+						return false; // Exit if comment box is not found
+					}
+					commentBox.click();
+					commentBox.innerText = prepareComment( comment );
+				}, 100 );
 			} catch ( error ) {
-				// Log an error if the process fails
 				console.error( "Failed to post the comment:", error );
 			}
 		};
 
 		/**
-		 * Function to like the video.
+		 * Likes the video.
 		 * @return {void}
 		 */
 		const likeVideo = () => {
 			try {
 				// Find the like button and click it if it is not already liked
-				const likeButton = qs(
-					"like-button-view-model button[title=\"I like this\"]",
-				);
-				if ( likeButton !== null ) {
+				const likeButton = qs( "#like-button .yt-spec-button-shape-with-label > button[aria-pressed=false]" );
+				if ( likeButton ) {
 					likeButton.click();
 				}
 			} catch ( error ) {
-				// Log an error if the process fails
 				console.error( "Failed to like the video:", error );
 			}
 		};
 
-		// Execute the functions to post a comment and like the video
+		// Execute the functions
 		await postComment( randomComment );
 		likeVideo();
 	} catch ( error ) {
-		// Log an error if the overall process fails
 		console.error( "An error occurred:", error );
 	}
 }() );
