@@ -1,15 +1,10 @@
 import { promises as fs } from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
 
 import ora from "ora"; // Import ora for spinner
 
 // URL to fetch Kabir Ke Dohe API data
 const API_URL = "https://santo-ki-seekh.netlify.app/api/kabir-ke-dohe/";
-
-// Derive __dirname from import.meta.url
-const __filename = fileURLToPath( import.meta.url );
-const __dirname = path.dirname( __filename );
 
 /**
  * Fetches Kabir Ke Dohe data from the API, processes it,
@@ -36,7 +31,7 @@ async function fetchKabirKeDohe() {
 			.map( ( item ) => item.verse_hi.split( "\n" ).map( ( verse ) => verse.trim() ) );
 
 		// Define the path to the output file
-		const filePath = path.join( __dirname, "..", "src", "comments.json" );
+		const filePath = path.join( process.cwd(), "lib", "comments.json" );
 		const fileName = path.basename( filePath ); // Extract file name
 
 		// Ensure the 'src' directory exists, create it if necessary
