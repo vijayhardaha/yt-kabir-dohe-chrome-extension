@@ -5,7 +5,7 @@
   "version": "1.0.5",
   "permissions": ["activeTab", "scripting"],
   "background": {
-    "service_worker": "src/background.js"
+    "service_worker": "lib/background.js"
   },
   "action": {
     "default_icon": {
@@ -23,7 +23,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["src/comments.json"],
+      "resources": ["lib/comments.json"],
       "matches": ["*://www.youtube.com/*"]
     }
   ]
