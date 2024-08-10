@@ -18,7 +18,7 @@
 		 */
 		const prepareComment = ( comment ) => {
 			// Define the footer to be appended to the comment
-			const commentFooter = [ "", "~ संत कबीर साहेब जी ❤️❤️" ];
+			const commentFooter = [ "", "— संत कबीर साहेब जी 🔥 🙏" ];
 
 			// Combine the comment and the footer into a single array and join with newline characters
 			return [ ...comment, ...commentFooter ]
