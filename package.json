@@ -1,22 +1,22 @@
 {
-  "name": "yt-kabir-dohe-chrome-extension",
-  "version": "1.0.3",
-  "description": "A Chrome extension that automatically posts a random Kabir doha in the YouTube video comment box and likes the video. Simply click the extension icon while watching a YouTube video to activate.",
-  "scripts": {
-    "build": "node lib/build.js",
-    "lint": "eslint --ext .js src",
-    "lint:fix": "eslint --ext .js,.jsx src --fix"
-  },
-  "author": "Vijay Hardaha",
-  "license": "MIT",
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.6.0",
-    "axios": "^1.7.2",
-    "eslint": "^8.15.0",
-    "eslint-config-google": "^0.14.0",
-    "globals": "^15.8.0"
-  }
+	"name": "yt-kabir-dohe-chrome-extension",
+	"version": "1.0.4",
+	"description": "A Chrome extension that automatically posts a random Kabir doha in the YouTube video comment box and likes the video. Simply click the extension icon while watching a YouTube video to activate.",
+	"scripts": {
+		"build": "node bin/build.mjs",
+		"lint": "eslint ./ --ext .js,.jsx src",
+		"lint:fix": "eslint ./ --ext .js,.jsx src --fix"
+	},
+	"author": "Vijay Hardaha",
+	"license": "MIT",
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"devDependencies": {
+		"@wordpress/eslint-plugin": "^20.1.0",
+		"eslint": "^8.57.0"
+	},
+	"dependencies": {
+		"ora": "^8.0.1"
+	}
 }
