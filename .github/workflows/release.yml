@@ -24,7 +24,7 @@ jobs:
         # This stores the tag value in the $tag environment variable.
 
       - name: Create ZIP file
-        run: zip -r yt-kabir-dohe-chrome-extension.zip * -x "*.git*" "node_modules/*" ".github/*" "lib/*" ".*" "eslint.*"
+        run: zip -r yt-kabir-dohe-chrome-extension.zip * -x "*.git*" "node_modules/*" ".github/*" "src/*" ".*" "eslint.*"
         # Create a ZIP archive excluding unnecessary files and folders.
 
       - name: Create GitHub Release
