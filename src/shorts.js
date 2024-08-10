@@ -16,7 +16,7 @@ import { prepareComment, qs, fetchRandomComment } from "./utils.js";
 		const postComment = async ( comment ) => {
 			try {
 				// Find the comment button and click it
-				const commentButton = qs( "#comments-button .yt-spec-button-shape-with-label > button" );
+				const commentButton = qs( "ytd-reel-video-renderer[is-active] #comments-button .yt-spec-button-shape-with-label > button" );
 				if ( ! commentButton ) {
 					return false; // Exit if comment button is not found
 				}
@@ -25,14 +25,14 @@ import { prepareComment, qs, fetchRandomComment } from "./utils.js";
 				// Wait for the comment box to be available
 				setTimeout( () => {
 					// Find and click the placeholder box
-					const placeholderBox = qs( "#placeholder-area #simplebox-placeholder" );
+					const placeholderBox = qs( "ytd-reel-video-renderer[is-active] #placeholder-area #simplebox-placeholder" );
 					if ( ! placeholderBox ) {
 						return false; // Exit if placeholder box is not found
 					}
 					placeholderBox.click();
 
 					// Find the comment box and post the comment
-					const commentBox = qs( ".ytd-comment-simplebox-renderer #contenteditable-root" );
+					const commentBox = qs( "ytd-reel-video-renderer[is-active] .ytd-comment-simplebox-renderer #contenteditable-root" );
 					if ( ! commentBox ) {
 						return false; // Exit if comment box is not found
 					}
@@ -51,7 +51,7 @@ import { prepareComment, qs, fetchRandomComment } from "./utils.js";
 		const likeVideo = () => {
 			try {
 				// Find the like button and click it if it is not already liked
-				const likeButton = qs( "#like-button .yt-spec-button-shape-with-label > button[aria-pressed=false]" );
+				const likeButton = qs( "ytd-reel-video-renderer[is-active] ytd-toggle-button-renderer#like-button .yt-spec-button-shape-with-label > button[aria-pressed=false]" );
 				if ( likeButton ) {
 					likeButton.click();
 				}
