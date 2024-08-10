@@ -1,8 +1,8 @@
 # YouTube Kabir Ke Dohe - Chrome Extension
 
-YouTube Kabir Ke Dohe - Chrome Extension is a Chrome extension that automates the process of posting a comment and liking YouTube videos. When you click on the extension icon while on a YouTube video page, it randomly picks a "Kabir's doha" from a predefined list and posts it, and likes the video.
+**YouTube Kabir Ke Dohe - Chrome Extension** is a Chrome extension that automates the process of posting a comment and liking YouTube videos. When you click on the extension icon while on a YouTube video page, it randomly picks a "Kabir's doha" from a predefined list and posts it, and likes the video.
 
-> Note: You'll have to press comment button on your own, this extension will only write the doha in your Youtube's video comment box.
+> Note: You'll need to press the "comment" button manually. This extension will only automatically write the doha (couplet) in the comment box of your YouTube video. Due to YouTube's rules and regulations, which are in place to prevent spam and misuse, automated commenting systems are restricted. Therefore, the extension can only assist with writing the comment but cannot bypass the manual action required to submit it. This approach helps ensure that comments are not flagged as spam and comply with YouTube's policies.
 
 ## Features
 
@@ -36,8 +36,9 @@ To install the extension locally:
 ## Usage
 
 1. Navigate to a YouTube video page.
-2. Click the YouTube Auto Commenter - Kabir Ke Dohe extension icon in the Chrome toolbar.
-3. The extension will post a randomly selected "Kabir Ke Dohe" from the predefined list and like the video.
+2. Scroll down the page until the comment section is rendered and visible.
+3. Click the YouTube Auto Commenter - Kabir Ke Dohe extension icon in the Chrome toolbar.
+4. The extension will post a randomly selected "Kabir Ke Dohe" from the predefined list and like the video.
 
 ## Development
 
@@ -47,20 +48,20 @@ To install the extension locally:
 yt-kabir-dohe-chrome-extension/
 ├── .github/
 │   └── workflows/
-│       └── release.yml
-├── icons/
-│   ├── icon16.png
-│   ├── icon32.png
-│   ├── icon48.png
-│   ├── icon128.png
+│       └── release.yml   # GitHub Actions workflow for releases
 ├── bin/
-│   ├── build.js
+│   ├── build.js          # Script for building the extension
+├── icons/
+│   ├── icon128.png       # 128x128 pixel icon for the extension
+│   ├── icon48.png        # 48x48 pixel icon for the extension
+│   ├── icon32.png        # 32x32 pixel icon for the extension
+│   ├── icon16.png        # 16x16 pixel icon for the extension
 ├── src/
-│   ├── content.js
-│   ├── background.js
-│   ├── comments.json
-├── manifest.json
-├── README.md
+│   ├── background.js     # Background script for handling extension events
+│   ├── comments.json     # JSON file containing predefined Kabir Ke Dohe
+│   ├── content.js        # Content script for interacting with the YouTube page
+├── manifest.json         # Metadata file for the extension
+├── README.md             # Documentation for the extension
 ```
 
 ### Scripts
