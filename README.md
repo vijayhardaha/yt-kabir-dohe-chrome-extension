@@ -53,7 +53,7 @@ yt-kabir-dohe-chrome-extension/
 │   ├── icon32.png
 │   ├── icon48.png
 │   ├── icon128.png
-├── lib/
+├── bin/
 │   ├── build.js
 ├── src/
 │   ├── content.js
