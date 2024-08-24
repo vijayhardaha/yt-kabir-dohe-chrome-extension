@@ -49,27 +49,33 @@ yt-kabir-dohe-chrome-extension/
 ├── .github/
 │   └── workflows/
 │       └── release.yml   # GitHub Actions workflow for releases
-├── bin/
-│   ├── build.js          # Script for building the extension
 ├── icons/
-│   ├── icon128.png       # 128x128 pixel icon for the extension
-│   ├── icon48.png        # 48x48 pixel icon for the extension
-│   ├── icon32.png        # 32x32 pixel icon for the extension
-│   ├── icon16.png        # 16x16 pixel icon for the extension
+│   ├── icon128.png           # 128x128 pixel icon for the extension
+│   ├── icon16.png            # 16x16 pixel icon for the extension
+│   ├── icon32.png            # 32x32 pixel icon for the extension
+│   └── icon48.png            # 48x48 pixel icon for the extension
+├── lib/
+│   ├── background.js         # Background script for handling extension events and messaging
+│   ├── comments.json         # JSON file containing predefined "Kabir Ke Dohe" comments
+│   └── scripts/
+│       ├── shorts.js         # Script for interacting with YouTube Shorts pages
+│       └── watch.js          # Script for interacting with regular YouTube video pages
+├── manifest.json             # Manifest file defining the extension, permissions, and settings
 ├── src/
-│   ├── background.js     # Background script for handling extension events
-│   ├── comments.json     # JSON file containing predefined Kabir Ke Dohe
-│   ├── content.js        # Content script for interacting with the YouTube page
-├── manifest.json         # Metadata file for the extension
-├── README.md             # Documentation for the extension
+│   ├── bin/
+│   │   └── build.mjs         # Script for building the extension using modern JavaScript
+│   ├── shorts.js             # Additional logic specific to YouTube Shorts
+│   ├── utils.js              # Utility functions used across different scripts
+│   └── watch.js              # Additional logic specific to YouTube video watch pages
+└── webpack.config.js         # Configuration file for Webpack bundling
 ```
 
 ### Scripts
 
-- `background.js`: Handles the click event of the extension button.
-- `content.js`: Interacts with the YouTube page to post a comment and like the video.
-- `comments.json`: Stores the list of "Kabir Ke Dohe".
-- `manifest.json`: Defines the extension and its permissions.
+- `background.js`: Handles background tasks and communication with content scripts.
+- `comments.json`: Contains "Kabir Ke Dohe" for posting comments on YouTube.
+- `shorts.js`: Manages interactions with YouTube Shorts, such as commenting and liking.
+- `watch.js`: Handles interactions on regular YouTube video pages, like commenting and liking.
 
 ### GitHub Actions
 
