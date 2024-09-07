@@ -6,19 +6,16 @@
  * @param {string} selector - A string containing a selector to match.
  * @return {Element|null} - The first element that matches the selector, or null if no matches are found.
  */
-export const qs = ( selector ) => {
+export const qs = (selector) => {
 	try {
 		// Use document.querySelector to find the first element that matches the selector
-		const element = document.querySelector( selector );
+		const element = document.querySelector(selector);
 
 		// Return the found element or null if no match is found
 		return element;
-	} catch ( error ) {
+	} catch (error) {
 		// Log an error if the selection process fails
-		console.error(
-			`Failed to select element with selector "${ selector }":`,
-			error,
-		);
+		console.error(`Failed to select element with selector "${selector}":`, error);
 		return null;
 	}
 };
@@ -29,20 +26,20 @@ export const qs = ( selector ) => {
  * @param {string[]} comment - An array of strings representing lines of the comment.
  * @return {string} - The formatted comment as a single string.
  */
-export const prepareComment = ( comment ) => {
+export const prepareComment = (comment) => {
 	const { verse, meaning } = comment;
 
-	const verseArr = verse.split( "\n" ).map( ( v ) => v.trim() );
+	const verseArr = verse.split("\n").map((v) => v.trim());
 
 	// Define the footer to be appended to the comment
-	const commentFooter = [ "", "— संत कबीर साहेब जी 🔥 🙏" ];
+	const commentFooter = ["", "— संत कबीर साहेब जी 🔥 🙏"];
 
 	// Combine the comment and the footer into a single array and join with newline characters
-	return [ ...verseArr, "", `अर्थ: ${ meaning }`, ...commentFooter ]
-		.join( "\n" ) // Join array elements into a single string with newline characters
-		.replace( "  ", " " ) // Correct double spacing
-		.replace( " ।", "।" ) // Correct spacing around punctuation "।"
-		.replace( " ।।", "।।" ); // Correct spacing around punctuation "।।"
+	return [...verseArr, "", `अर्थ: ${meaning}`, ...commentFooter]
+		.join("\n") // Join array elements into a single string with newline characters
+		.replace("  ", " ") // Correct double spacing
+		.replace(" ।", "।") // Correct spacing around punctuation "।"
+		.replace(" ।।", "।।"); // Correct spacing around punctuation "।।"
 };
 
 /**
@@ -53,14 +50,14 @@ export const prepareComment = ( comment ) => {
 export const fetchRandomComment = async () => {
 	try {
 		// Fetch comments from the JSON file using Chrome extension API
-		const response = await fetch( chrome.runtime.getURL( "lib/comments.json" ) );
+		const response = await fetch(chrome.runtime.getURL("lib/comments.json"));
 		const comments = await response.json();
 
 		// Pick a random comment from the comments array
-		return comments[ Math.floor( Math.random() * comments.length ) ];
-	} catch ( error ) {
+		return comments[Math.floor(Math.random() * comments.length)];
+	} catch (error) {
 		// Log an error if the fetching process fails
-		console.error( "Failed to fetch comments:", error );
+		console.error("Failed to fetch comments:", error);
 		return []; // Return an empty array in case of error
 	}
 };

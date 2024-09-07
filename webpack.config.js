@@ -1,6 +1,6 @@
-const path = require( "path" );
+const path = require("path");
 
-const { CleanWebpackPlugin } = require( "clean-webpack-plugin" );
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
 	mode: "production", // Change to 'development' for development mode
@@ -9,7 +9,7 @@ module.exports = {
 		shorts: "./src/shorts.js",
 	},
 	output: {
-		path: path.resolve( __dirname, "lib", "scripts" ),
+		path: path.resolve(__dirname, "lib", "scripts"),
 		filename: "[name].js",
 		clean: true,
 	},
@@ -21,7 +21,7 @@ module.exports = {
 				use: {
 					loader: "babel-loader",
 					options: {
-						presets: [ "@babel/preset-env" ],
+						presets: ["@babel/preset-env"],
 					},
 				},
 			},
@@ -30,15 +30,15 @@ module.exports = {
 	optimization: {
 		minimize: true, // Ensure minimization is enabled
 		minimizer: [
-			new ( require( "terser-webpack-plugin" ) )( {
+			new (require("terser-webpack-plugin"))({
 				terserOptions: {
 					format: {
 						comments: false, // Remove all comments including licenses
 					},
 				},
 				extractComments: false, // Disable license comment extraction
-			} ),
+			}),
 		],
 	},
-	plugins: [ new CleanWebpackPlugin() ],
+	plugins: [new CleanWebpackPlugin()],
 };

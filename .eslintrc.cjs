@@ -2,11 +2,15 @@
 module.exports = {
 	root: true,
 	parserOptions: {
-		ecmaVersion: 2020,
+		ecmaVersion: 2024, // Use the latest ECMAScript version
 		sourceType: "module",
 	},
-	plugins: [ "import" ],
-	extends: [ "plugin:@wordpress/eslint-plugin/esnext", "eslint:recommended" ],
+	plugins: ["import", "prettier"],
+	extends: [
+		"eslint:recommended",
+		"plugin:@wordpress/eslint-plugin/esnext",
+		"plugin:prettier/recommended", // Integrate Prettier with ESLint
+	],
 	env: {
 		es2021: true,
 		node: true,
@@ -18,11 +22,11 @@ module.exports = {
 		"no-irregular-whitespace": "warn", // Warning for irregular whitespace
 		"no-undef": "warn", // Warning for using undeclared variables
 		"no-unused-vars": "warn", // Warning for unused variables
-		quotes: [ "error", "double" ], // Enforcing the use of double quotes for strings
+		quotes: ["error", "double"], // Enforcing the use of double quotes for strings
 		"import/order": [
 			"error",
 			{
-				groups: [ "builtin", "external", "internal" ],
+				groups: ["builtin", "external", "internal"],
 				alphabetize: {
 					order: "asc",
 					caseInsensitive: true,
@@ -31,5 +35,6 @@ module.exports = {
 				warnOnUnassignedImports: true,
 			},
 		],
+		"prettier/prettier": ["error"],
 	},
 };
