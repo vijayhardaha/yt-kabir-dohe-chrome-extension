@@ -27,15 +27,15 @@ export const qs = (selector) => {
  * @return {string} - The formatted comment as a single string.
  */
 export const prepareComment = (comment) => {
-	const { verse, meaning } = comment;
+	const { couplet, meaning } = comment;
 
-	const verseArr = verse.split("\n").map((v) => v.trim());
+	const coupletArr = couplet.split("\n").map((v) => v.trim());
 
 	// Define the footer to be appended to the comment
 	const commentFooter = ["", "— संत कबीर साहेब जी 🔥 🙏"];
 
 	// Combine the comment and the footer into a single array and join with newline characters
-	return [...verseArr, "", `अर्थ: ${meaning}`, ...commentFooter]
+	return [...coupletArr, "", `अर्थ: ${meaning}`, ...commentFooter]
 		.join("\n") // Join array elements into a single string with newline characters
 		.replace("  ", " ") // Correct double spacing
 		.replace(" ।", "।") // Correct spacing around punctuation "।"

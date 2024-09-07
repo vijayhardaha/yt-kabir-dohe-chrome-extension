@@ -4,7 +4,7 @@ import path from "path";
 import ora from "ora"; // Import ora for spinner
 
 // URL to fetch Kabir Ke Dohe API data
-const API_URL = "https://santo-ki-seekh.vercel.app/api/kabir-ke-dohe";
+const API_URL = "https://santonkiseekh.vercel.app/api/kabir-couplets";
 
 /**
  * Fetches Kabir Ke Dohe data from the API using POST method, processes it,
@@ -23,7 +23,6 @@ async function fetchKabirKeDohe() {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({}), // Add necessary data if needed
 		});
 
 		if (!response.ok) {
@@ -36,13 +35,11 @@ async function fetchKabirKeDohe() {
 			throw new Error(result.message || "Data fetch unsuccessful");
 		}
 
-		const verses = result.data; // Use 'data' key as per the provided API route
-
 		// Process and filter data
-		const filteredData = verses
-			.filter((item) => item.verse_hindi?.trim())
+		const couplets = result.data
+			.filter((item) => item.couplet_hindi?.trim())
 			.map((item) => ({
-				verse: item.verse_hindi.trim(),
+				couplet: item.couplet_hindi.trim(),
 				meaning: item.explanation_hindi.trim(),
 			}));
 
@@ -54,7 +51,7 @@ async function fetchKabirKeDohe() {
 		await fs.mkdir(path.dirname(filePath), { recursive: true });
 
 		// Write the processed data to the JSON file
-		await fs.writeFile(filePath, JSON.stringify(filteredData, null, 2));
+		await fs.writeFile(filePath, JSON.stringify(couplets, null, 2));
 
 		spinner.succeed(`Comments JSON is ready at ${fileName}`);
 	} catch (error) {
