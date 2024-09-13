@@ -5,8 +5,8 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
 	mode: "production", // Change to 'development' for development mode
 	entry: {
-		watch: "./src/watch.js",
-		shorts: "./src/shorts.js",
+		watch: "./src/scripts/watch.js",
+		shorts: "./src/scripts/shorts.js",
 	},
 	output: {
 		path: path.resolve(__dirname, "lib", "scripts"),
