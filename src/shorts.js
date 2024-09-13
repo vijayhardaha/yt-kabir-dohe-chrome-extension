@@ -16,7 +16,9 @@ import { prepareComment, qs, fetchRandomComment } from "./utils.js";
 		const postComment = async (comment) => {
 			try {
 				// Find the comment button and click it
-				const commentButton = qs("ytd-reel-video-renderer[is-active] #comments-button .yt-spec-button-shape-with-label > button");
+				const commentButton = qs(
+					"ytd-reel-video-renderer[is-active] #comments-button .yt-spec-button-shape-with-label > button"
+				);
 				if (!commentButton) {
 					return false; // Exit if comment button is not found
 				}
@@ -32,7 +34,9 @@ import { prepareComment, qs, fetchRandomComment } from "./utils.js";
 					placeholderBox.click();
 
 					// Find the comment box and post the comment
-					const commentBox = qs("ytd-reel-video-renderer[is-active] .ytd-comment-simplebox-renderer #contenteditable-root");
+					const commentBox = qs(
+						"ytd-reel-video-renderer[is-active] .ytd-comment-simplebox-renderer #contenteditable-root"
+					);
 					if (!commentBox) {
 						return false; // Exit if comment box is not found
 					}
