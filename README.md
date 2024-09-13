@@ -63,11 +63,12 @@ yt-kabir-dohe-chrome-extension/
 ├── manifest.json             # Manifest file defining the extension, permissions, and settings
 ├── src/
 │   ├── bin/
-│   │   └── build.mjs         # Script for building the extension using modern JavaScript
-│   ├── shorts.js             # Additional logic specific to YouTube Shorts
-│   ├── utils.js              # Utility functions used across different scripts
-│   └── watch.js              # Additional logic specific to YouTube video watch pages
-└── webpack.config.js         # Configuration file for Webpack bundling
+│   │   └── build.js         # Script for building the extension using modern JavaScript
+│   └── scripts/
+│       ├── shorts.js         # Additional logic specific to YouTube Shorts
+│       ├── utils.js          # Utility functions used across different scripts
+│       ├── watch.js          # Additional logic specific to YouTube video watch pages
+└── webpack.config.cjs         # Configuration file for Webpack bundling
 ```
 
 ### Scripts
