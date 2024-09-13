@@ -4,7 +4,7 @@ import path from "path";
 import ora from "ora"; // Import ora for spinner
 
 // URL to fetch Kabir Ke Dohe API data
-const API_URL = "https://santonkiseekh.vercel.app/api/kabir-couplets";
+const API_URL = "https://kabir-ke-dohe-api.vercel.app/api/couplets";
 
 /**
  * Fetches Kabir Ke Dohe data from the API using POST method, processes it,
@@ -23,10 +23,11 @@ async function fetchKabirKeDohe() {
 			headers: {
 				"Content-Type": "application/json",
 			},
+			body: JSON.stringify({ perPage: -1 }),
 		});
 
 		if (!response.ok) {
-			throw new Error("Network response was not ok");
+			throw new Error(`Network response was not ok: ${response.statusText}`);
 		}
 
 		const result = await response.json();
@@ -36,7 +37,7 @@ async function fetchKabirKeDohe() {
 		}
 
 		// Process and filter data
-		const couplets = result.data
+		const couplets = result.data.couplets
 			.filter((item) => item.couplet_hindi?.trim())
 			.map((item) => ({
 				couplet: item.couplet_hindi.trim(),
