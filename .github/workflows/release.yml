@@ -1,41 +1,49 @@
-name: Release Chrome Extension
+name: Publish Extension
 
 on:
   push:
     tags:
-      - 'v*'  # Trigger on tag push that starts with 'v'
+      - 'v*' # Trigger only when tags starting with 'v' are pushed
 
 jobs:
-  build:
-    name: Create Release
+  build-and-publish:
     runs-on: ubuntu-latest
 
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Get Tag
-        id: tag
-        run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-        # Extract and store the tag from the GITHUB_REF environment variable.
-        # This stores the tag value in the $tag environment variable.
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
 
-      - name: Create ZIP file
-        run: zip -r yt-kabir-dohe-chrome-extension.zip manifest.json LICENSE lib/ icons/
-        # Create a ZIP archive.
+    - name: Install dependencies
+      run: npm install
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: ncipollo/release-action@v1
-        with:
-          token: ${{ env.GITHUB_TOKEN }}
-          artifacts: yt-kabir-dohe-chrome-extension.zip
-          tag: ${{ github.ref }}
-          name: ${{ steps.tag.outputs.tag }}
-          draft: false
-          prerelease: false
-        # Use the ncipollo/release-action to create a GitHub release
-        # using the generated ZIP file and the tag.
+    - name: Build the extension
+      run: npm run build
+
+    - name: Rename dist directory
+      run: mv dist yt-kabir-dohe-chrome-extension
+
+    - name: Create ZIP file
+      run: zip -r yt-kabir-dohe-chrome-extension.zip yt-kabir-dohe-chrome-extension
+
+    - name: Extract clean version name
+      id: extract_version
+      run: echo "TAG_VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+    - name: Create GitHub Release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ github.ref_name }}
+        name: Release ${{ env.TAG_VERSION }} # Use extracted clean version name
+        body: |
+          This release was automatically generated.
+        draft: false
+        prerelease: false
+        artifacts: yt-kabir-dohe-chrome-extension.zip
+        makeLatest: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
