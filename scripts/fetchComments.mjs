@@ -7,50 +7,48 @@ import ora from "ora"; // Import ora for spinner
 const API_URL = "https://kabir-ke-dohe-api.vercel.app/api/couplets";
 
 async function fetchComments() {
-  const spinner = ora("Fetching data...").start();
+	const spinner = ora("Fetching data...").start();
 
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ perPage: -1 }),
-    });
+	try {
+		const response = await fetch(API_URL, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ perPage: -1 }),
+		});
 
-    if (!response.ok) {
-      throw new Error(`Network response was not ok: ${response.statusText}`);
-    }
+		if (!response.ok) {
+			throw new Error(`Network response was not ok: ${response.statusText}`);
+		}
 
-    const result = await response.json();
+		const result = await response.json();
 
-    if (!result.success) {
-      throw new Error(result.message || "Data fetch unsuccessful");
-    }
+		if (!result.success) {
+			throw new Error(result.message || "Data fetch unsuccessful");
+		}
 
-    // Process and filter data
-    const couplets = result.data.couplets
-      .filter((item) => item.couplet_hindi?.trim())
-      .map((item) => ({
-        couplet: item.couplet_hindi.trim(),
-        meaning: item.explanation_hindi.trim(),
-      }));
+		// Process and filter data
+		const couplets = result.data.couplets
+			.filter((item) => item.couplet_hindi?.trim())
+			.map((item) => ({
+				couplet: item.couplet_hindi.trim(),
+				meaning: item.explanation_hindi.trim(),
+			}));
 
-    // Define the path to the output file
-    const filePath = path.join(process.cwd(), "public", "comments.json");
-    const fileName = path.basename(filePath); // Extract file name
+		// Define the path to the output file
+		const filePath = path.join(process.cwd(), "public", "comments.json");
+		const fileName = path.basename(filePath); // Extract file name
 
-    // Ensure the 'lib' directory exists, create it if necessary
-    await fs.mkdir(path.dirname(filePath), { recursive: true });
+		// Ensure the 'lib' directory exists, create it if necessary
+		await fs.mkdir(path.dirname(filePath), { recursive: true });
 
-    // Write the processed data to the JSON file
-    await fs.writeFile(filePath, JSON.stringify(couplets, null, 2));
+		// Write the processed data to the JSON file
+		await fs.writeFile(filePath, JSON.stringify(couplets, null, 2));
 
-    spinner.succeed(`Comments JSON is ready at ${fileName}`);
-  } catch (error) {
-    spinner.fail("Failed to fetch or write data");
-    console.error(`Error: ${error.message}`);
-  }
+		spinner.succeed(`Comments JSON is ready at ${fileName}`);
+	} catch (error) {
+		spinner.fail("Failed to fetch or write data");
+		console.error(`Error: ${error.message}`);
+	}
 }
 
 // Call the function to fetch and process Kabir Ke Dohe data
