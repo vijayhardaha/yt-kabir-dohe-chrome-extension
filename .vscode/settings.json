@@ -1,7 +1,29 @@
 {
+  // ==============================================================================
+  // VS CODE WORKSPACE SETTINGS
+  // ==============================================================================
+  // Purpose: Defines workspace-scoped editor and lint behavior so contributors
+  // use consistent save actions and JavaScript validation rules.
+  // Docs: https://code.visualstudio.com/docs/getstarted/settings
+  // ==============================================================================
+
+  // ==========================================
+  // SAVE ACTIONS
+  // ==========================================
   "editor.codeActionsOnSave": {
+    // Run ESLint auto-fix only when explicitly requested by save action policy.
     "source.fixAll.eslint": "explicit"
   },
+
+  // ==========================================
+  // FORMATTER BEHAVIOR
+  // ==========================================
+  // Keep native editor format-on-save disabled to avoid conflict with ESLint flow.
   "editor.formatOnSave": false,
+
+  // ==========================================
+  // ESLINT LANGUAGE SCOPE
+  // ==========================================
+  // Restrict ESLint validation to JavaScript files in this workspace.
   "eslint.validate": ["javascript"]
 }
