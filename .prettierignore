@@ -9,26 +9,33 @@
 # ==========================================
 # VCS & DEPENDENCIES
 # ==========================================
-# Why: Git internals and third-party packages should never be formatted.
-# Default: Prettier includes files unless matched by ignore rules.
-# Use Case: Prevents unnecessary work and accidental changes in external files.
+# Skip Git internals.
 .git
+# Skip installed dependencies.
 node_modules
 
 # ==========================================
 # BUILD OUTPUTS
 # ==========================================
-# Why: Build directories are generated and can be safely regenerated.
-# Default: Included during broad format runs like `prettier --write .`.
-# Use Case: Keeps formatting focused on source files developers maintain.
+# Skip generated distribution files.
 dist
+# Skip generated output directories.
 out
+# Skip generated script artifacts.
 lib/scripts
 
 # ==========================================
 # STATIC GENERATED ASSETS
 # ==========================================
-# Why: Static output folders may contain minified or machine-produced files.
-# Default: Included in recursive formatting scans.
-# Use Case: Avoids touching assets that should remain byte-stable.
+# Skip machine-generated static assets.
 public/static
+
+# ==========================================
+# PLAIN TEXT CONFIG FILES
+# ==========================================
+# Skip .editorconfig because Prettier parser inference is not available.
+.editorconfig
+# Skip .gitignore because Prettier parser inference is not available.
+.gitignore
+# Skip .prettierignore to avoid self-format parser inference errors.
+.prettierignore

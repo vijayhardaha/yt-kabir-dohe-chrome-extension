@@ -2,8 +2,8 @@
  * ==============================================================================
  * WEBPACK BUNDLE CONFIGURATION
  * ==============================================================================
- * Purpose: Builds the browser extension scripts and copies required static
- * assets into the distributable output directory.
+ * Purpose: Bundles extension runtime scripts and copies required static assets
+ * into the distributable output directory.
  * Docs: https://webpack.js.org/configuration/
  * ==============================================================================
  */
@@ -18,10 +18,7 @@ module.exports = {
 	// ==========================================
 	// ENTRY POINTS
 	// ==========================================
-	// Why: Defines independent bundles for each extension runtime surface.
-	// Default: `entry` defaults to `./src/index.js` if omitted.
-	// Use Case: Produces separate scripts for `background`, `tasks/shorts`, and
-	// `tasks/watch` used by the extension.
+	// Define one bundle per extension runtime surface.
 	entry: {
 		"tasks/shorts": "./src/tasks/shorts.js",
 		"tasks/watch": "./src/tasks/watch.js",
@@ -31,17 +28,13 @@ module.exports = {
 	// ==========================================
 	// OUTPUT STRATEGY
 	// ==========================================
-	// Why: Controls output destination and bundle filename convention.
-	// Default: Webpack emits to memory unless `output.path` is specified.
-	// Use Case: Writes predictable files into `dist` for extension packaging.
+	// Emit bundles to dist using entry-key-based filenames.
 	output: { path: path.resolve(__dirname, "dist"), filename: "[name].js" },
 
 	// ==========================================
 	// MODULE TRANSFORMATION
 	// ==========================================
-	// Why: Transpiles JavaScript for broader runtime compatibility.
-	// Default: Without rules, files are bundled without Babel transforms.
-	// Use Case: Keeps extension scripts compatible with target browser engines.
+	// Transpile JavaScript files with Babel.
 	module: {
 		rules: [
 			{
@@ -58,9 +51,7 @@ module.exports = {
 	// ==========================================
 	// BUILD PLUGINS
 	// ==========================================
-	// Why: Cleans stale assets and copies extension metadata/static files.
-	// Default: Webpack does not clean output or copy static assets by default.
-	// Use Case: Ensures `manifest.json`, icons, and comments data ship in `dist`.
+	// Clean stale assets and copy static extension resources.
 	plugins: [
 		new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
 		new CopyPlugin({
@@ -84,17 +75,13 @@ module.exports = {
 	// ==========================================
 	// MODULE RESOLUTION
 	// ==========================================
-	// Why: Declares resolvable file extensions for import resolution.
-	// Default: Includes `.js`, `.json`, and `.wasm` in webpack defaults.
-	// Use Case: Keeps explicit extension policy aligned with this codebase.
+	// Restrict import extension resolution to project-relevant types.
 	resolve: { extensions: [".js", ".json"] },
 
 	// ==========================================
 	// OPTIMIZATION POLICY
 	// ==========================================
-	// Why: Enables minification and shared chunk extraction for production builds.
-	// Default: `mode`-dependent optimization behavior applies when omitted.
-	// Use Case: Reduces bundle size while keeping source maps manageable.
+	// Minify bundles and enable shared chunk extraction.
 	optimization: {
 		splitChunks: { chunks: "all" },
 		minimize: true,
@@ -108,8 +95,6 @@ module.exports = {
 	// ==========================================
 	// SOURCE MAPS
 	// ==========================================
-	// Why: Keeps debugging info lightweight while preserving stack trace utility.
-	// Default: Varies by webpack `mode` and may be disabled in production.
-	// Use Case: Helps diagnose extension runtime errors during development/testing.
+	// Generate lightweight source maps for debugging.
 	devtool: "cheap-source-map",
 };

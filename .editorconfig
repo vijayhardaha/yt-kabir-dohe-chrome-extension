@@ -1,65 +1,64 @@
 # ==============================================================================
 # EDITORCONFIG STYLE CONTRACT
 # ==============================================================================
-# Purpose: Defines shared editor behavior so formatting remains consistent
-# across local development, CI checks, and pull requests.
+# Purpose: Defines editor-level formatting defaults so contributors and CI
+# produce consistent whitespace and line-ending behavior.
 # Docs: https://editorconfig.org/
 # ==============================================================================
 
 # ==========================================
-# GLOBAL POLICY
+# ROOT CONTROL
 # ==========================================
-# Why: Mark this file as the top-most EditorConfig so no parent rules leak in.
-# Default: false (parent .editorconfig files may continue to apply).
-# Use Case: Keeps this extension repository fully self-contained.
+# Stop searching for parent .editorconfig files outside this repository.
 root = true
 
-# Why: Establish a stable baseline for all files unless overridden below.
-# Default: Editor-specific behavior can differ across machines.
-# Use Case: Avoids inconsistent diffs from encoding, EOL, or trailing whitespace.
+# ==========================================
+# GLOBAL DEFAULTS
+# ==========================================
 [*]
+# Force UTF-8 to avoid encoding drift across tools and platforms.
 charset = utf-8
+# Use LF to prevent cross-platform line-ending diffs in Git.
 end_of_line = lf
+# Default to tabs for repository-wide indentation.
 indent_style = tab
+# Use a visual width of 4 for tab indentation in non-code files.
 indent_size = 4
+# Ensure every file ends with a newline for POSIX-friendly tooling.
 insert_final_newline = true
+# Remove trailing spaces by default to keep diffs clean.
 trim_trailing_whitespace = true
 
 # ==========================================
-# TEXT CONTENT OVERRIDES
+# PLAIN TEXT OVERRIDES
 # ==========================================
-# Why: Preserve intentional spacing in plain text artifacts.
-# Default: Inherits true from the global policy above.
-# Use Case: Keeps text samples and fixture-like notes intact.
 [*.txt]
+# Preserve intentional trailing spaces in plain text content.
 trim_trailing_whitespace = false
 
 # ==========================================
-# DOCUMENTATION & MARKUP OVERRIDES
+# MARKUP OVERRIDES
 # ==========================================
-# Why: Markdown and YAML often use alignment or trailing spaces intentionally.
-# Default: Inherits trimming and base indentation from global policy.
-# Use Case: Prevents accidental markdown rendering changes.
 [*.{md,yml}]
+# Use spaces in markup files where visual alignment is common.
 indent_style = space
+# Keep 2-space indentation for markdown/yaml readability.
 indent_size = 2
+# Preserve markdown/yaml trailing spaces when intentionally used.
 trim_trailing_whitespace = false
 
 # ==========================================
 # JSON OVERRIDES
 # ==========================================
-# Why: Keep JSON indentation tab-based per project convention.
-# Default: Inherits space indentation from global policy.
-# Use Case: Matches existing repository JSON formatting.
 [*.json]
+# Keep JSON indentation aligned with project formatter output.
 indent_size = 2
+# Avoid trimming JSON trailing spaces aggressively in editor workflows.
 trim_trailing_whitespace = false
 
 # ==========================================
-# SCRIPTING OVERRIDES
+# SCRIPT OVERRIDES
 # ==========================================
-# Why: Enforce 2-space indentation in JS/TS ecosystem files.
-# Default: Inherits global indentation if omitted.
-# Use Case: Aligns with ESLint + Prettier output for source code.
 [*.{js,mjs,cjs,jsx,ts,tsx}]
+# Match JS/TS indentation width with project formatter defaults.
 indent_size = 2

@@ -2,8 +2,8 @@
  * ==============================================================================
  * PRETTIER CONFIGURATION
  * ==============================================================================
- * Purpose: Defines deterministic formatting rules so local development, code
- * reviews, and CI produce identical output.
+ * Purpose: Defines deterministic formatting rules so local development and CI
+ * produce the same output for JavaScript and related files.
  * Docs: https://prettier.io/docs/en/configuration.html
  * ==============================================================================
  */
@@ -15,34 +15,50 @@ export default {
 	// ==========================================
 	// LINE WIDTH & INDENTATION
 	// ==========================================
-	// Why: Keeps lines readable while matching project indentation conventions.
-	// Default: `printWidth` is 80 and `tabWidth` is 2 when omitted.
-	// Use Case: Reduces noisy wrapping changes in PR diffs.
+	// Maximum preferred line length before wrapping.
 	printWidth: 80,
+	// Display width of each indentation level.
 	tabWidth: 2,
+	// Use tabs instead of spaces for indentation characters.
 	useTabs: true,
 
 	// ==========================================
-	// QUOTES, SEMICOLONS & COMMAS
+	// PUNCTUATION STYLE
 	// ==========================================
-	// Why: Standardizes core JavaScript style choices across all contributors.
-	// Default: `semi: true`, `singleQuote: false`, `trailingComma: "all"` (v3).
-	// Use Case: Avoids style debates and ensures stable formatting output.
+	// Always terminate statements with semicolons.
 	semi: true, // Always use semicolons
+	// Prefer double quotes in JavaScript/TypeScript files.
 	singleQuote: false, // Double quotes (standard for HTML/React props)
+	// Preserve existing line endings across environments.
 	endOfLine: "auto", // Maintains existing line endings
+	// Add trailing commas where valid in ES5 syntax.
+	trailingComma: "es5", // Commas where valid in ES5
 
 	// ==========================================
-	// SPACING & FUNCTION SYNTAX
+	// SPACING & WRAPPING
 	// ==========================================
-	// Why: Improves readability for objects and callback signatures.
-	// Default: `bracketSpacing: true`, `arrowParens: "always"`.
-	// Use Case: Keeps object literals and arrow functions consistently shaped.
+	// Always include parentheses around arrow function parameters.
 	arrowParens: "always", // (x) => {} instead of x => {}
-	trailingComma: "es5", // Commas where valid in ES5
+	// Insert spaces between brackets in object literals.
 	bracketSpacing: true, // { foo: bar }
+	// Keep closing bracket on a new line for multi-line tags.
 	bracketSameLine: false, // Puts > on a new line
+	// Respect manual wrapping in prose files.
 	proseWrap: "preserve", // Respect manual line breaks
+	// Position wrapped operators at the start of continued lines.
 	experimentalOperatorPosition: "start", // Align operators in multiline expressions
+	// Preserve existing object wrapping style where possible.
 	objectWrap: "collapse", // Preserve existing wrapping of objects
+
+	// ==========================================
+	// FILE OVERRIDES
+	// ==========================================
+	// Apply parser overrides for file types that do not infer cleanly.
+	overrides: [
+		{
+			// Use plaintext parser for root plain-text config files.
+			files: [".editorconfig", ".gitignore", ".prettierignore"],
+			options: { parser: "plaintext" },
+		},
+	],
 };
