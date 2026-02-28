@@ -1,4 +1,40 @@
-import { prepareComment, qs, fetchRandomComment } from "../utils/utils";
+/* global chrome */
+
+const qs = (selector) => {
+	try {
+		return document.querySelector(selector);
+	} catch (error) {
+		console.error(
+			`Failed to select element with selector "${selector}":`,
+			error
+		);
+		return null;
+	}
+};
+
+const prepareComment = (comment) => {
+	const { couplet, meaning } = comment;
+	const coupletArr = couplet.split("\n").map((v) => v.trim());
+	const commentFooter = ["", "— संत कबीर साहेब जी 🔥 🙏"];
+
+	return [...coupletArr, "", `अर्थ: ${meaning}`, ...commentFooter]
+		.join("\n")
+		.replace("  ", " ")
+		.replace(" ।", "।")
+		.replace(" ।।", "।।");
+};
+
+const fetchRandomComment = async () => {
+	try {
+		const response = await fetch(chrome.runtime.getURL("comments.json"));
+		const comments = await response.json();
+
+		return comments[Math.floor(Math.random() * comments.length)];
+	} catch (error) {
+		console.error("Failed to fetch comments:", error);
+		return [];
+	}
+};
 
 (async function () {
 	try {

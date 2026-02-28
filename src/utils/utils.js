@@ -15,7 +15,10 @@ export const qs = (selector) => {
 		return element;
 	} catch (error) {
 		// Log an error if the selection process fails
-		console.error(`Failed to select element with selector "${selector}":`, error);
+		console.error(
+			`Failed to select element with selector "${selector}":`,
+			error
+		);
 		return null;
 	}
 };
