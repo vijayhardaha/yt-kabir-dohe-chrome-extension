@@ -28,6 +28,36 @@ A Chrome extension that helps post "Kabir Ke Dohe" comments and like YouTube vid
 2. Scroll to the comment section.
 3. Click the extension icon to post a random "Kabir Ke Dohe" and like the video.
 
+## Development
+
+1. Install dependencies:
+
+   ```sh
+   pnpm install
+   ```
+
+2. Build once for production output in `dist`:
+
+   ```sh
+   pnpm build
+   ```
+
+3. Build in watch mode while developing:
+
+   ```sh
+   pnpm dev
+   ```
+
+4. In Chrome, open `chrome://extensions/`, enable Developer mode, and load the `dist` folder as unpacked.
+
+## Data Refresh
+
+To refresh `public/comments.json` from source comments data:
+
+```sh
+pnpm fetchdata
+```
+
 ## Contribution
 
 1. Fork the repository.
