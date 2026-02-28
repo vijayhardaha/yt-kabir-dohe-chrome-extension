@@ -10,40 +10,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '22'
+
+    - name: Set up pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: "10"
+        run_install: false
 
     - name: Install dependencies
-      run: npm install
+      run: pnpm install --frozen-lockfile
+
+    - name: Lint scripts
+      run: pnpm run lint
+
+    - name: Format check
+      run: pnpm run format:check
 
     - name: Build the extension
       run: npm run build
 
     - name: Rename dist directory
-      run: mv dist yt-kabir-dohe-chrome-extension
+      run: mv dist yt-kabir-dohe
 
     - name: Create ZIP file
-      run: zip -r yt-kabir-dohe-chrome-extension.zip yt-kabir-dohe-chrome-extension
+      run: zip -r yt-kabir-dohe.zip yt-kabir-dohe
+
+    - name: Upload zip artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: yt-kabir-dohe
+        path: yt-kabir-dohe.zip
 
     - name: Extract clean version name
       id: extract_version
       run: echo "TAG_VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
-    - name: Create GitHub Release
-      uses: ncipollo/release-action@v1
+    - name: Create GitHub release
+      if: startsWith(github.ref, 'refs/tags/v')
+      uses: softprops/action-gh-release@v2
       with:
-        tag: ${{ github.ref_name }}
-        name: Release ${{ env.TAG_VERSION }} # Use extracted clean version name
-        body: |
-          This release was automatically generated.
-        draft: false
-        prerelease: false
-        artifacts: yt-kabir-dohe-chrome-extension.zip
-        makeLatest: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        files: npm-install-assistant.zip
