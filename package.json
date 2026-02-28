@@ -9,6 +9,7 @@
 		"lint:fix": "eslint . --ext .js --fix",
 		"format": "prettier \"src/**/*.{js,css,html}\" --write",
 		"format:check": "prettier \"src/**/*.{js,css,html}\" --check",
+		"pack-local-extension": "pnpm run lint && pnpm run format:check && pnpm run build && mkdir -p ~/chrome-extensions && rm -rf ~/chrome-extensions/yt-kabir-dohe && cp -R dist ~/chrome-extensions/yt-kabir-dohe",
 		"fetchdata": "node scripts/fetchComments.mjs"
 	},
 	"author": "Vijay Hardaha",
