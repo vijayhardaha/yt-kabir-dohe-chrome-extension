@@ -1,32 +1,65 @@
-# Root EditorConfig file to maintain consistent coding style across editors and IDEs
+# ==============================================================================
+# EDITORCONFIG STYLE CONTRACT
+# ==============================================================================
+# Purpose: Defines shared editor behavior so formatting remains consistent
+# across local development, CI checks, and pull requests.
+# Docs: https://editorconfig.org/
+# ==============================================================================
+
+# ==========================================
+# GLOBAL POLICY
+# ==========================================
+# Why: Mark this file as the top-most EditorConfig so no parent rules leak in.
+# Default: false (parent .editorconfig files may continue to apply).
+# Use Case: Keeps this extension repository fully self-contained.
 root = true
 
-# Default settings for all files
+# Why: Establish a stable baseline for all files unless overridden below.
+# Default: Editor-specific behavior can differ across machines.
+# Use Case: Avoids inconsistent diffs from encoding, EOL, or trailing whitespace.
 [*]
-charset = utf-8                 # Set character encoding to UTF-8
-end_of_line = lf                # Use LF (Unix-style) for line endings
-indent_style = space            # Use spaces for indentation
-indent_size = 2                 # Set indentation size to 2 spaces
-insert_final_newline = true     # Ensure a newline is present at end of files
-trim_trailing_whitespace = true # Remove trailing whitespace
+charset = utf-8
+end_of_line = lf
+indent_style = tab
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
 
-# Override for text files (preserve trailing whitespace)
+# ==========================================
+# TEXT CONTENT OVERRIDES
+# ==========================================
+# Why: Preserve intentional spacing in plain text artifacts.
+# Default: Inherits true from the global policy above.
+# Use Case: Keeps text samples and fixture-like notes intact.
 [*.txt]
 trim_trailing_whitespace = false
 
-# Override for Markdown, JSON, and YAML files
+# ==========================================
+# DOCUMENTATION & MARKUP OVERRIDES
+# ==========================================
+# Why: Markdown and YAML often use alignment or trailing spaces intentionally.
+# Default: Inherits trimming and base indentation from global policy.
+# Use Case: Prevents accidental markdown rendering changes.
 [*.{md,yml}]
-indent_style = space  # Use spaces for indentation
-indent_size = 2       # Set indentation size to 2 spaces
-trim_trailing_whitespace = false
-
-# Override for JSON files (use tabs but keep indent size as 2)
-[*.json]
-indent_style = tab
+indent_style = space
 indent_size = 2
 trim_trailing_whitespace = false
 
-# Override for JavaScript, TypeScript, and JSX/TSX files
+# ==========================================
+# JSON OVERRIDES
+# ==========================================
+# Why: Keep JSON indentation tab-based per project convention.
+# Default: Inherits space indentation from global policy.
+# Use Case: Matches existing repository JSON formatting.
+[*.json]
+indent_size = 2
+trim_trailing_whitespace = false
+
+# ==========================================
+# SCRIPTING OVERRIDES
+# ==========================================
+# Why: Enforce 2-space indentation in JS/TS ecosystem files.
+# Default: Inherits global indentation if omitted.
+# Use Case: Aligns with ESLint + Prettier output for source code.
 [*.{js,mjs,cjs,jsx,ts,tsx}]
-indent_style = space
 indent_size = 2

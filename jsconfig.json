@@ -1,5 +1,25 @@
 {
+  // ==============================================================================
+  // JAVASCRIPT INTELLIGENCE CONFIG
+  // ==============================================================================
+  // Purpose: Configures editor-level JavaScript path intelligence for this
+  // extension codebase.
+  // Docs: https://code.visualstudio.com/docs/languages/jsconfig
+  // ==============================================================================
+
+  // ==========================================
+  // COMPILER OPTIONS
+  // ==========================================
+  // Why: Enables path alias resolution for imports rooted at src.
+  // Default: No custom aliases when omitted.
+  // Use Case: Allows concise imports like "@/utils/utils".
   "compilerOptions": {
+    // ==========================================
+    // PATH ALIASES
+    // ==========================================
+    // Why: Maps alias prefixes to physical project directories.
+    // Default: Bare alias "@/*" is not recognized by editor tooling.
+    // Use Case: Improves autocomplete and jump-to-definition for aliased imports.
     "paths": {
       "@/*": ["./src/*"]
     }

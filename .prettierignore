@@ -1,6 +1,34 @@
+# ==============================================================================
+# PRETTIER EXCLUSION RULES
+# ==============================================================================
+# Purpose: Tells Prettier which paths to skip so formatting only runs on
+# human-authored files and avoids generated or vendor-managed artifacts.
+# Docs: https://prettier.io/docs/ignore
+# ==============================================================================
+
+# ==========================================
+# VCS & DEPENDENCIES
+# ==========================================
+# Why: Git internals and third-party packages should never be formatted.
+# Default: Prettier includes files unless matched by ignore rules.
+# Use Case: Prevents unnecessary work and accidental changes in external files.
 .git
-dist
-lib/scripts
 node_modules
+
+# ==========================================
+# BUILD OUTPUTS
+# ==========================================
+# Why: Build directories are generated and can be safely regenerated.
+# Default: Included during broad format runs like `prettier --write .`.
+# Use Case: Keeps formatting focused on source files developers maintain.
+dist
 out
+lib/scripts
+
+# ==========================================
+# STATIC GENERATED ASSETS
+# ==========================================
+# Why: Static output folders may contain minified or machine-produced files.
+# Default: Included in recursive formatting scans.
+# Use Case: Avoids touching assets that should remain byte-stable.
 public/static
