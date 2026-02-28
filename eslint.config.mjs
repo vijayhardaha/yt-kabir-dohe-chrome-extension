@@ -76,9 +76,7 @@ export default defineConfig([
 		// Why: Registers Prettier as an ESLint plugin for format-rule integration.
 		// Default: Prettier checks are not available through ESLint without this.
 		// Use Case: Lets CI fail on formatting issues via the lint command.
-		plugins: {
-			prettier: prettierPlugin,
-		},
+		plugins: { prettier: prettierPlugin },
 
 		// ==========================================
 		// SHARED SETTINGS
@@ -86,11 +84,7 @@ export default defineConfig([
 		// Why: React version auto-detection keeps React rules environment-aware.
 		// Default: Some React rules assume a fixed or unknown version.
 		// Use Case: Prevents version-mismatch lint noise across environments.
-		settings: {
-			react: {
-				version: "detect",
-			},
-		},
+		settings: { react: { version: "detect" } },
 
 		// ==========================================
 		// CUSTOM RULES
@@ -98,8 +92,6 @@ export default defineConfig([
 		// Why: Enforces formatter parity by surfacing formatting issues in lint.
 		// Default: Formatting differences may only appear in editor/CI format steps.
 		// Use Case: One command (`eslint`) reports both code and style violations.
-		rules: {
-			"prettier/prettier": "error",
-		},
+		rules: { "prettier/prettier": "error" },
 	},
 ]);

@@ -20,7 +20,7 @@ export default {
 	// Use Case: Reduces noisy wrapping changes in PR diffs.
 	printWidth: 80,
 	tabWidth: 2,
-	useTabs: false,
+	useTabs: true,
 
 	// ==========================================
 	// QUOTES, SEMICOLONS & COMMAS
@@ -28,9 +28,9 @@ export default {
 	// Why: Standardizes core JavaScript style choices across all contributors.
 	// Default: `semi: true`, `singleQuote: false`, `trailingComma: "all"` (v3).
 	// Use Case: Avoids style debates and ensures stable formatting output.
-	semi: true,
-	singleQuote: false,
-	trailingComma: "es5",
+	semi: true, // Always use semicolons
+	singleQuote: false, // Double quotes (standard for HTML/React props)
+	endOfLine: "auto", // Maintains existing line endings
 
 	// ==========================================
 	// SPACING & FUNCTION SYNTAX
@@ -38,6 +38,11 @@ export default {
 	// Why: Improves readability for objects and callback signatures.
 	// Default: `bracketSpacing: true`, `arrowParens: "always"`.
 	// Use Case: Keeps object literals and arrow functions consistently shaped.
-	bracketSpacing: true,
-	arrowParens: "always",
+	arrowParens: "always", // (x) => {} instead of x => {}
+	trailingComma: "es5", // Commas where valid in ES5
+	bracketSpacing: true, // { foo: bar }
+	bracketSameLine: false, // Puts > on a new line
+	proseWrap: "preserve", // Respect manual line breaks
+	experimentalOperatorPosition: "start", // Align operators in multiline expressions
+	objectWrap: "collapse", // Preserve existing wrapping of objects
 };
